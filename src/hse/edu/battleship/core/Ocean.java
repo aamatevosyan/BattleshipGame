@@ -1,6 +1,14 @@
 package hse.edu.battleship.core;
 
-import java.util.Random;
+import hse.edu.battleship.gui.GameWindow;
+import hse.edu.battleship.gui.NetworkGameWindow;
+import hse.edu.battleship.gui.SoloGameWindow;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.StageStyle;
+
+import java.util.*;
 
 /**
  * This contains a 10x10 array of Ships, representing the "ocean," and some methods to manipulate it.
@@ -29,6 +37,11 @@ public class Ocean {
     private int shipsSunk;
 
     /**
+     * The number of ships damaged.
+     */
+    private int shipsDamaged;
+
+    /**
      * Used for randomizing
      */
     private static Random random = new Random();
@@ -55,10 +68,10 @@ public class Ocean {
      */
     public void placeAllShipsRandomly() {
         Ship[] shipArray = {new Battleship(), new Cruiser(), new Cruiser(),
-        new Destroyer(), new Destroyer(), new Destroyer(), new Submarine(),
-        new Submarine(), new Submarine(), new Submarine()};
+                new Destroyer(), new Destroyer(), new Destroyer(), new Submarine(),
+                new Submarine(), new Submarine(), new Submarine()};
 
-        for (Ship ship:shipArray) {
+        for (Ship ship : shipArray) {
             placeShipRandomly(ship);
         }
     }
@@ -80,6 +93,7 @@ public class Ocean {
 
     /**
      * Place all ship randomly on the ocean.
+     *
      * @param ship the ship to place
      */
     private void placeShipRandomly(Ship ship) {
@@ -89,13 +103,36 @@ public class Ocean {
             x = getRandomCoordinate();
             y = getRandomCoordinate();
             orientation = getRandomOrientation();
-        } while(!ship.okToPlaceShipAt(x, y, orientation, this));
+        } while (!ship.okToPlaceShipAt(x, y, orientation, this));
         ship.placeShipAt(x, y, orientation, this);
+    }
+
+    public void setUpOcean() {
+        List<String> choices = new ArrayList<>();
+        choices.add("Random");
+        choices.add("Custom");
+
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("Random", choices);
+
+        dialog.setTitle("Choice Dialog");
+        dialog.setHeaderText("Hurry up, choose your ships selection mode.");
+        dialog.initStyle(StageStyle.UNDECORATED);
+        dialog.setContentText("Choose ocean type:");
+
+        Optional<String> result = dialog.showAndWait();
+
+        result.ifPresent(s -> {
+            if (s.equals("Random")) {
+                placeAllShipsRandomly();
+            } else {
+                System.out.println("Custom");
+            }
+        });
     }
 
 
     /**
-     * @param row the row to look at
+     * @param row    the row to look at
      * @param column the column to look at
      * @return true if the given location contains a ship, false if it does not.
      */
@@ -105,7 +142,7 @@ public class Ocean {
 
 
     /**
-     * @param row the row to shoot at
+     * @param row    the row to shoot at
      * @param column the column to shoot at
      * @return true if the given location contains a "real" ship, still afloat, (not an EmptySea), false if it does not.
      * In addition, this method updates the number of shots that have been fired, and the number of hits.
@@ -164,9 +201,9 @@ public class Ocean {
      */
     public void print() {
         System.out.println(Helper.getColoredString(Helper.NUM, "  0 1 2 3 4 5 6 7 8 9"));
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             System.out.print(Helper.getColoredString(Helper.NUM, i + " "));
-            for(int j = 0; j < 10; j++) {
+            for (int j = 0; j < 10; j++) {
                 System.out.print(coloredCodeAt(i, j) + " ");
             }
             System.out.println();
@@ -178,9 +215,9 @@ public class Ocean {
      */
     public void printDebug() {
         System.out.println(Helper.getColoredString(Helper.NUM, "  0 1 2 3 4 5 6 7 8 9"));
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             System.out.print(Helper.getColoredString(Helper.NUM, i + " "));
-            for(int j = 0; j < 10; j++) {
+            for (int j = 0; j < 10; j++) {
                 System.out.print(getAt(i, j) + " ");
             }
             System.out.println();
@@ -197,7 +234,7 @@ public class Ocean {
     }
 
     /**
-     * @param row row
+     * @param row    row
      * @param column column
      * @return true if row and column are in bound, otherwise false.
      */
@@ -206,7 +243,7 @@ public class Ocean {
     }
 
     /**
-     * @param row the row of ship to look at
+     * @param row    the row of ship to look at
      * @param column the column of ship to look at
      * @return the code that defines coordinate state
      */
@@ -220,7 +257,7 @@ public class Ocean {
 
 
     /**
-     * @param row the row of ship to look at
+     * @param row    the row of ship to look at
      * @param column the column of ship to look at
      * @return the colored code that defines coordinate state
      */
@@ -232,20 +269,36 @@ public class Ocean {
 
     /**
      * Sets the ship at given location
-     * @param row the row of ship to look at
+     *
+     * @param row    the row of ship to look at
      * @param column the column of ship to look at
-     * @param ship the ship
+     * @param ship   the ship
      */
     public void setAt(int row, int column, Ship ship) {
         ships[row][column] = ship;
     }
 
     /**
-     * @param row the row of ship to look at
+     * @param row    the row of ship to look at
      * @param column the column of ship to look at
      * @return the ship from given location
      */
     public Ship getAt(int row, int column) {
         return ships[row][column];
+    }
+
+    public int getShipsDamaged() {
+        shipsDamaged = 0;
+        Set<Ship> ships = new HashSet<>();
+        for (int i = 0; i < 10; i++)
+            for (int j = 0; j < 10;j++)
+                if (isOccupied(i, j))
+                    ships.add(getAt(i, j));
+        for (Ship ship :
+                ships) {
+            if (ship.isDamaged())
+                shipsDamaged++;
+        }
+        return shipsDamaged;
     }
 }

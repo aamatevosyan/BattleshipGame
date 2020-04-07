@@ -96,22 +96,21 @@ public class BattleshipGame {
         System.out.println();
     }
 
-    /**
-     * @return true if user wants to play again and returns false otherwise.
-     */
-    private static boolean isNewGame() {
-        System.out.print("Press any key to restart the game or enter \"quit\" to exit: ");
-
-        return !in.nextLine().equals("quit");
-    }
+//    /**
+//     * @return true if user wants to play again and returns false otherwise.
+//     */
+//    private static boolean isNewGame() {
+//        System.out.print("Press any key to restart the game or enter \"quit\" to exit: ");
+//
+//        return !in.nextLine().equals("quit");
+//    }
 
     /**
      * Prints results when user wins
      */
     private static void onWin() {
         System.out.println("You win!!!");
-        System.out.printf("Game is over. Your score is : %s%n",
-                getColoredString(INFO, Integer.toString(ocean.getShotsFired())));
+        System.out.printf("Game is over. Your score is : %s%n", Integer.toString(ocean.getShotsFired()));
     }
 
     /**
@@ -123,16 +122,16 @@ public class BattleshipGame {
         return "You just sank a " + ocean.getAt(row, column).getShipType();
     }
 
-    /**
-     * The main entrance of the app.
-     * @param args the passed arguments
-     */
-    public static void main(String[] args) {
-        do {
-            startGame();
-            onWin();
-        } while(isNewGame());
-    }
+//    /**
+//     * The main entrance of the app.
+//     * @param args the passed arguments
+//     */
+//    public static void main(String[] args) {
+//        do {
+//            startGame();
+//            onWin();
+//        } while(isNewGame());
+//    }
 }
 
 

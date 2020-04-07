@@ -1,5 +1,6 @@
 package hse.edu.battleship.gui;
 
+import hse.edu.battleship.core.Ocean;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -13,30 +14,20 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
-import java.io.IOException;
-
-public class OceanView extends HBox {
+public class OceanView {
 
     static final String[] COLORS = {"#ccf0fe", "#56cdfc", "#cbcbd2"};
 
+    static final String NEUTRAL_COLOR = "#ccf0fe";
+    static final String EMPTY_COLOR = "#56cdfc";
+    static final String DAMAGED_COLOR = "#e54044";
+    static final String SUNK_COLOR = "#cbcbd2";
+
     Button[][] oceanCells = new Button[10][10];
 
-    GridPane gridPane;
+    Ocean ocean;
 
-    public OceanView() {
-        super();
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-
-        Parent part = null;
-        try {
-            part = fxmlLoader.load(getClass().getResource("OceanView.fxml").openStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        gridPane = (GridPane)part;
-
+    public OceanView(GridPane gridPane) {
         for (int i = 1; i <= 10; i++) {
             Label label = new Label();
             label.setAlignment(Pos.CENTER);
@@ -69,17 +60,88 @@ public class OceanView extends HBox {
                 button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
                 oceanCells[i - 1][j - 1] = button;
-                setCellColor(i - 1, j - 1, 0);
+                setCellNeutral(i - 1, j - 1);
 
                 gridPane.add(button, i, j);
             }
         }
 
-        getChildren().add(part);
+        ocean = new Ocean();
+        ocean.placeAllShipsRandomly();
     }
 
-    void setCellColor(int i, int j, int state) {
-        oceanCells[i][j].setStyle("-fx-background-color:" + COLORS[state] +";");
+    void setCellColor(int i, int j) {
+        String code = ocean.codeAt(i, j);
+
+        switch (code) {
+            case ".":
+                setCellNeutral(i, j);
+                break;
+            case "-":
+                setCellEmpty(i, j);
+                break;
+            case "S":
+                setCellDamaged(i, j);
+                break;
+            case "X":
+                setCellSunk(i, j);
+                break;
+        }
+    }
+
+    void updateOceanView() {
+        for (int i = 0; i < 10; i++)
+            for (int j = 0; j < 10; j++)
+                setCellColor(i, j);
+    }
+
+    void setCellColor(int i, int j, String color) {
+        oceanCells[i][j].setStyle("-fx-background-color:" + color +";");
+    }
+
+    void setCellNeutral(int i, int j) {
+        setCellColor(i, j, NEUTRAL_COLOR);
+    }
+
+    void setCellEmpty(int i, int j) {
+        setCellColor(i, j, EMPTY_COLOR);
+    }
+
+    void setCellDamaged(int i, int j) {
+        setCellColor(i, j, DAMAGED_COLOR);
+    }
+
+    void setCellSunk(int i, int j) {
+        setCellColor(i, j, SUNK_COLOR);
+    }
+
+    /**
+     * @param row the row to look at
+     * @param column the column to look at
+     * @return sink message of the ship
+     */
+    public String getSinkMessage(int row, int column) {
+        return "You just sank a " + ocean.getAt(row, column).getShipType();
+    }
+
+    void shootAt(int i, int j) {
+        if (ocean.shootAt(i, j)) {
+            if (ocean.getAt(i, j).isSunk())
+                System.out.println(getSinkMessage(i, j));
+            else
+                System.out.println("You just hit a ship :)");
+        } else {
+            System.out.println("Oops, you missed :(");
+        }
+        System.out.println();
+
+        if (ocean.isGameOver())
+            onWin();
+    }
+
+    void onWin() {
+        System.out.println("You win!!!");
+        System.out.printf("Game is over. Your score is : %s%n", Integer.toString(ocean.getShotsFired()));
     }
 
     void setCellAdapter(CellAdapter cellAdapter) {
@@ -89,8 +151,6 @@ public class OceanView extends HBox {
                 int finalI = i;
                 int finalJ = j;
                 button.setOnMouseClicked(mouseEvent -> cellAdapter.onCellClicked(finalI, finalJ));
-                button.setOnMouseEntered(mouseEvent -> cellAdapter.onCellHoverStarted(finalI, finalJ));
-                button.setOnMouseExited(mouseEvent -> cellAdapter.onCellHoverEnded(finalI, finalJ));
             }
         }
     }

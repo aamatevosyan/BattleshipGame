@@ -168,6 +168,14 @@ public abstract class Ship {
         }
     }
 
+    public boolean isHit(int row, int column) {
+        int delta = (horizontal) ? column - bowColumn : row - bowRow;
+
+        if (delta < 0 || delta >= length || isSunk())
+            return false;
+        else
+            return hit[delta];
+    }
 
     /**
      * @param row the row of ship to look at
@@ -188,6 +196,14 @@ public abstract class Ship {
             if (!hit[i])
                 return false;
         return true;
+    }
+
+    public boolean isDamaged() {
+        int damagedCount = 0;
+        for (int i = 0; i < length; i++)
+            if (hit[i])
+                damagedCount++;
+        return damagedCount > 0 && damagedCount != length;
     }
 
     /**

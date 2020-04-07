@@ -1,7 +1,6 @@
 package hse.edu.battleship.gui;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import hse.edu.battleship.core.Ocean;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.function.Consumer;
 
 public class Controller implements Initializable {
 
@@ -47,15 +45,42 @@ public class Controller implements Initializable {
 
             Optional<String> result = dialog.showAndWait();
 
-            result.ifPresent(s -> {
+            if ( result.isPresent() )
+            {
                 GameWindow gameWindow = null;
-                if (s.equals("Solo")) {
-                    gameWindow = new SoloGameWindow();
+                if (result.get().equals("Solo")) {
+
+//                    SoloGameManager soloGameManager = new SoloGameManager(gameWindow);
+
+//                    Ocean humanOcean = new Ocean();
+//                    humanOcean.setUpOcean();
+//
+//                    Ocean robotOcean = new Ocean();
+//                    robotOcean.placeAllShipsRandomly();
+//
+//                    Robot human = new Robot(soloGameManager);
+//                    human.name = "Captain Jack Sparrow";
+//                    human.enemyOcean = robotOcean;
+//                    soloGameManager.registerPlayer(human);
+//
+//                    Robot robot = new Robot(soloGameManager);
+//                    robot.name = "WALL-E";
+//                    robot.enemyOcean = humanOcean;
+//                    soloGameManager.registerPlayer(robot);
+
+
+
+                    Ocean ocean = new Ocean();
+                    ocean.placeAllShipsRandomly();
+                    gameWindow = new SoloGameWindow(ocean);
+                    gameWindow.startNewGame();
+
+//                    human.doTurn();
+                    //robot.doTurn();
                 } else {
-                    gameWindow = new NetworkGameWindow();
+                    //TODO Network based game
                 }
-                gameWindow.show();
-            });
+            }
         });
 
         exitApplicationButton.setOnAction(actionEvent -> System.exit(0));
