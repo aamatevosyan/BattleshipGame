@@ -30,7 +30,7 @@
         </VBox>
         <VBox alignment="CENTER" prefHeight="41.0" prefWidth="480.0">
             <children>
-                <Button fx:id="newGameButton" mnemonicParsing="false"
+                <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#onNewGame"
                         style="-fx-background-color: #5e5567; -fx-padding: 5px; -fx-background-insets: 0px; -fx-border-insets: 5px;"
                         text="Start new battle, arr!" textFill="WHITE">
                     <opaqueInsets>
@@ -41,7 +41,7 @@
         </VBox>
         <VBox alignment="CENTER" prefHeight="0.0" prefWidth="380.0">
             <children>
-                <Button fx:id="exitApplicationButton" mnemonicParsing="false"
+                <Button fx:id="exitApplicationButton" mnemonicParsing="false" onAction="#onExitApplication"
                         style="-fx-background-color: #5e6067; -fx-padding: 5px; -fx-background-insets: 0px; -fx-border-insets: 5px;"
                         text="Pathetic run, loser!" textFill="WHITE">
                     <opaqueInsets>

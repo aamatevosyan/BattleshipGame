@@ -33,7 +33,7 @@ public class OceanCreateViewController implements Initializable {
 
     OceanView oceanView;
 
-    boolean isOk = false;
+    boolean isCorrect = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

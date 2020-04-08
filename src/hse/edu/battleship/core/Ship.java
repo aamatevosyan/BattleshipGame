@@ -13,6 +13,10 @@ public abstract class Ship {
      */
     private final boolean[] hit = new boolean[4];
     /**
+     * the number of squares occupied by the ship. An "empty sea" location has length 1
+     */
+    protected int length;
+    /**
      * the row (0 to 9) which contains the bow (front) of the ship
      */
     private int bowRow;
@@ -24,11 +28,6 @@ public abstract class Ship {
      * true if the ship occupies a single row, false otherwise
      */
     private boolean horizontal;
-    /**
-     * the number of squares occupied by the ship. An "empty sea" location has length 1
-     */
-    protected int length;
-
 
     /**
      * @return the length of this particular ship
@@ -164,7 +163,7 @@ public abstract class Ship {
     public boolean isHit(int row, int column) {
         int delta = (horizontal) ? column - bowColumn : row - bowRow;
 
-        if (delta < 0 || delta >= length || isSunk())
+        if (delta < 0 || delta >= length)
             return false;
         else
             return hit[delta];

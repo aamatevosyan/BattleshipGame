@@ -8,8 +8,8 @@ import java.util.Objects;
 public class PrintStreamCapturer extends PrintStream {
 
     private final TextArea text;
-    private boolean atLineStart;
     private final String indent;
+    private boolean atLineStart;
 
     public PrintStreamCapturer(TextArea textArea, PrintStream capturedStream, String indent) {
         super(capturedStream);

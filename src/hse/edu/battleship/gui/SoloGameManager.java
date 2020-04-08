@@ -67,7 +67,7 @@ public class SoloGameManager {
                 Ocean o = new Ocean();
                 o.placeAllShipsRandomly();
                 gameWindow.controller.oceanView.ocean = o;
-                gameWindow.controller.oceanView.updateOceanView();
+                gameWindow.controller.oceanView.resetOceanView();
 
                 gameWindow.controller.setStats();
                 gameWindow.controller.detailsTextArea.clear();

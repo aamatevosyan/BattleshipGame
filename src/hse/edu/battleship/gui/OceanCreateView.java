@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,9 +29,10 @@ public class OceanCreateView {
         primaryStage.setTitle("BattleShip Game - Arrr!!!");
         primaryStage.setMinWidth(350);
         primaryStage.setMinHeight(520);
-        primaryStage.show();
+        primaryStage.initModality(Modality.APPLICATION_MODAL);
 
         controller = fxmlLoader.getController();
+        primaryStage.showAndWait();
     }
 
 }

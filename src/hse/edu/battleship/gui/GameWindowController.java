@@ -1,7 +1,6 @@
 package hse.edu.battleship.gui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -9,10 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.StageStyle;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class GameWindowController implements Initializable {
+public class GameWindowController {
     @FXML
     TextArea statsTextArea;
 
@@ -32,10 +28,7 @@ public class GameWindowController implements Initializable {
 
     PrintStreamCapturer printStreamCapturer;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        shootButton.setDefaultButton(true);
+    public void initialize() {
         oceanView = new OceanView(oceanGridPane);
         printStreamCapturer = new PrintStreamCapturer(detailsTextArea, System.out);
         System.setOut(printStreamCapturer);

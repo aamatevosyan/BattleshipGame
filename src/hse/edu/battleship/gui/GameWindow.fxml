@@ -53,8 +53,8 @@
                     <children>
                         <TextField fx:id="coordinatesTextField" prefHeight="26.0" prefWidth="180.0"
                                    promptText="Enter coordinates by space"/>
-                        <Button fx:id="shootButton" focusTraversable="false" mnemonicParsing="false"
-                                style="-fx-font-family: Lobster, cursive;" text="Shoot!!!">
+                        <Button fx:id="shootButton" mnemonicParsing="false" style="-fx-font-family: Lobster, cursive;"
+                                text="Shoot!!!">
                             <opaqueInsets>
                                 <Insets/>
                             </opaqueInsets>
@@ -67,7 +67,8 @@
                         <Insets bottom="10.0"/>
                     </GridPane.margin>
                 </HBox>
-                <GridPane fx:id="oceanGridPane" alignment="CENTER" hgap="3.0" vgap="3.0">
+                <GridPane fx:id="oceanGridPane" alignment="CENTER" hgap="3.0" style="-fx-focus-color: #555555;"
+                          vgap="3.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
