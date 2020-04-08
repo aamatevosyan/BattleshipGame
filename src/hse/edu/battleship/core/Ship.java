@@ -6,32 +6,28 @@ package hse.edu.battleship.core;
 public abstract class Ship {
 
     /**
-     * the row (0 to 9) which contains the bow (front) of the ship
-     */
-    private int bowRow;
-
-    /**
-     * the column (0 to 9) which contains the bow (front) of the ship
-     */
-    private int bowColumn;
-
-    /**
-     * the number of squares occupied by the ship. An "empty sea" location has length 1
-     */
-    protected int length;
-
-    /**
-     * true if the ship occupies a single row, false otherwise
-     */
-    private boolean horizontal;
-
-    /**
      * an array of booleans telling whether that part of the ship has been hit.
      * Only battleships use all four locations;
      * cruisers use the first three;
      * destroyers 2; submarines 1; and "empty sea" either one or none.
      */
-    private boolean [] hit = new boolean[4];
+    private final boolean[] hit = new boolean[4];
+    /**
+     * the row (0 to 9) which contains the bow (front) of the ship
+     */
+    private int bowRow;
+    /**
+     * the column (0 to 9) which contains the bow (front) of the ship
+     */
+    private int bowColumn;
+    /**
+     * true if the ship occupies a single row, false otherwise
+     */
+    private boolean horizontal;
+    /**
+     * the number of squares occupied by the ship. An "empty sea" location has length 1
+     */
+    protected int length;
 
 
     /**
@@ -47,35 +43,18 @@ public abstract class Ship {
         return horizontal;
     }
 
+    /**
+     * @param horizontal true if the ship occupies a single row, false otherwise.
+     */
+    public void setHorizontal(boolean horizontal) {
+        this.horizontal = horizontal;
+    }
 
     /**
      * @return bowColumn
      */
     public int getBowColumn() {
         return bowColumn;
-    }
-
-
-    /**
-     * @return bowRow
-     */
-    public int getBowRow() {
-        return bowRow;
-    }
-
-
-    /**
-     * @param bowRow the row (0 to 9) which contains the bow (front) of the ship
-     */
-    public void setBowRow(int bowRow) {
-        this.bowRow = bowRow;
-    }
-
-    /**
-     * @param horizontal  true if the ship occupies a single row, false otherwise.
-     */
-    public void setHorizontal(boolean horizontal) {
-        this.horizontal = horizontal;
     }
 
     /**
@@ -85,6 +64,19 @@ public abstract class Ship {
         this.bowColumn = bowColumn;
     }
 
+    /**
+     * @return bowRow
+     */
+    public int getBowRow() {
+        return bowRow;
+    }
+
+    /**
+     * @param bowRow the row (0 to 9) which contains the bow (front) of the ship
+     */
+    public void setBowRow(int bowRow) {
+        this.bowRow = bowRow;
+    }
 
     /**
      * @return the type of this ship
@@ -93,16 +85,16 @@ public abstract class Ship {
 
 
     /**
-     * @param row the row (0 to 9) which contains the bow (front) of the ship
-     * @param column the column (0 to 9) which contains the bow (front) of the ship.
+     * @param row        the row (0 to 9) which contains the bow (front) of the ship
+     * @param column     the column (0 to 9) which contains the bow (front) of the ship.
      * @param horizontal true if the ship occupies a single row, false otherwise.
-     * @param ocean ocean where ship can be placed
+     * @param ocean      ocean where ship can be placed
      * @return true if it is okay to put a ship of this length with its bow in this location,
      * with the given orientation, and returns false otherwise.
      */
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
         int endRow = (horizontal) ? row : row + length - 1;
-        int endColumn = (horizontal) ? column + length - 1: column;
+        int endColumn = (horizontal) ? column + length - 1 : column;
 
         if (!ocean.checkBound(endRow, endColumn))
             return false;
@@ -128,10 +120,11 @@ public abstract class Ship {
      * "Puts" the ship in the ocean. This involves giving values to the bowRow, bowColumn, and horizontal
      * instance variables in the ship, and it also involves putting a reference to the ship in each of 1
      * or more locations (up to 4) in the ships array in the Ocean object.
-     * @param row the row (0 to 9) which contains the bow (front) of the ship
-     * @param column the column (0 to 9) which contains the bow (front) of the ship.
+     *
+     * @param row        the row (0 to 9) which contains the bow (front) of the ship
+     * @param column     the column (0 to 9) which contains the bow (front) of the ship.
      * @param horizontal true if the ship occupies a single row, false otherwise.
-     * @param ocean ocean where ship can be placed
+     * @param ocean      ocean where ship can be placed
      */
     public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
 
@@ -151,7 +144,7 @@ public abstract class Ship {
 
 
     /**
-     * @param row the row where we are shooting
+     * @param row    the row where we are shooting
      * @param column the column where we are shooting
      * @return If a part of the ship occupies the given row and column, and the ship hasn't been sunk,
      * mark that part of the ship as "hit" (in the hit array, 0 indicates the bow)
@@ -178,7 +171,7 @@ public abstract class Ship {
     }
 
     /**
-     * @param row the row of ship to look at
+     * @param row    the row of ship to look at
      * @param column the column of ship to look at
      * @return the code that defines coordinate state
      */

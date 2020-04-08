@@ -45,7 +45,7 @@ public class EmptySea extends Ship {
     }
 
     /**
-     * @param row the row where we are shooting
+     * @param row    the row where we are shooting
      * @param column the column where we are shooting
      * @return If a part of the ship occupies the given row and column, and the ship hasn't been sunk,
      * mark that part of the ship as "hit" (in the hit array, 0 indicates the bow)
@@ -60,7 +60,7 @@ public class EmptySea extends Ship {
     }
 
     /**
-     * @param row the row of ship to look at
+     * @param row    the row of ship to look at
      * @param column the column of ship to look at
      * @return the code that defines coordinate state
      */

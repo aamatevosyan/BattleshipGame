@@ -28,57 +28,56 @@ public class Controller implements Initializable {
         newGameButton.setOnAction(actionEvent -> {
             actionEvent.consume();
 
+            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("images/battleship_logo.png")));
+            imageView.setFitWidth(100);
+            imageView.setFitHeight(100);
+
             List<String> choices = new ArrayList<>();
             choices.add("Solo");
             choices.add("Network");
 
             ChoiceDialog<String> dialog = new ChoiceDialog<>("Solo", choices);
-            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("images/battleship_logo.png")));
-            imageView.setFitWidth(100);
-            imageView.setFitHeight(100);
 
             dialog.setGraphic(imageView);
-            dialog.setTitle("Choice Dialog");
             dialog.setHeaderText("The battle is on the way, take a wise decision.");
             dialog.initStyle(StageStyle.UNDECORATED);
             dialog.setContentText("Choose game mode:");
 
             Optional<String> result = dialog.showAndWait();
 
-            if ( result.isPresent() )
-            {
-                GameWindow gameWindow = null;
+            if (result.isPresent()) {
+                GameWindow gameWindow;
                 if (result.get().equals("Solo")) {
-
-//                    SoloGameManager soloGameManager = new SoloGameManager(gameWindow);
-
-//                    Ocean humanOcean = new Ocean();
-//                    humanOcean.setUpOcean();
-//
-//                    Ocean robotOcean = new Ocean();
-//                    robotOcean.placeAllShipsRandomly();
-//
-//                    Robot human = new Robot(soloGameManager);
-//                    human.name = "Captain Jack Sparrow";
-//                    human.enemyOcean = robotOcean;
-//                    soloGameManager.registerPlayer(human);
-//
-//                    Robot robot = new Robot(soloGameManager);
-//                    robot.name = "WALL-E";
-//                    robot.enemyOcean = humanOcean;
-//                    soloGameManager.registerPlayer(robot);
-
-
-
                     Ocean ocean = new Ocean();
                     ocean.placeAllShipsRandomly();
                     gameWindow = new SoloGameWindow(ocean);
                     gameWindow.startNewGame();
-
-//                    human.doTurn();
-                    //robot.doTurn();
                 } else {
-                    //TODO Network based game
+                    Ocean ocean;
+
+                    choices = new ArrayList<>();
+                    choices.add("Random");
+                    choices.add("Custom");
+
+                    dialog = new ChoiceDialog<>("Random", choices);
+                    dialog.setGraphic(imageView);
+
+                    dialog.setHeaderText("Hurry up, choose your ships coordinates.");
+                    dialog.initStyle(StageStyle.UNDECORATED);
+                    dialog.setContentText("Choose selection mode:");
+
+                    result = dialog.showAndWait();
+
+                    if (result.isPresent()) {
+                        if (result.get().equals("Random")) {
+                            ocean = new Ocean();
+                            ocean.placeAllShipsRandomly();
+                        } else {
+                            //TODO Ships selection - OceanViewCreate
+                        }
+
+                        //TODO Network based game
+                    }
                 }
             }
         });

@@ -1,14 +1,8 @@
 package hse.edu.battleship.core;
 
-import hse.edu.battleship.gui.GameWindow;
-import hse.edu.battleship.gui.NetworkGameWindow;
-import hse.edu.battleship.gui.SoloGameWindow;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.StageStyle;
-
-import java.util.*;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * This contains a 10x10 array of Ships, representing the "ocean," and some methods to manipulate it.
@@ -16,35 +10,26 @@ import java.util.*;
 public class Ocean {
 
     /**
+     * Used for randomizing
+     */
+    private static final Random random = new Random();
+    /**
      * Used to quickly determine which ship is in any given location.
      */
-    private Ship[][] ships = new Ship[10][10];
-
+    private final Ship[][] ships = new Ship[10][10];
     /**
      * The total number of shots fired by the user.
      */
     private int shotsFired;
-
     /**
      * The number of times a shot hit a ship. If the user shoots the same part of a ship more than once,
      * every hit is counted, even though the additional "hits" don't do the user any good.
      */
     private int hitCount;
-
     /**
      * The number of ships sunk (10 ships in all).
      */
     private int shipsSunk;
-
-    /**
-     * The number of ships damaged.
-     */
-    private int shipsDamaged;
-
-    /**
-     * Used for randomizing
-     */
-    private static Random random = new Random();
 
     /**
      * Creates an "empty" ocean (fills the ships array with EmptySeas). Also initializes any game variables,
@@ -108,26 +93,7 @@ public class Ocean {
     }
 
     public void setUpOcean() {
-        List<String> choices = new ArrayList<>();
-        choices.add("Random");
-        choices.add("Custom");
 
-        ChoiceDialog<String> dialog = new ChoiceDialog<>("Random", choices);
-
-        dialog.setTitle("Choice Dialog");
-        dialog.setHeaderText("Hurry up, choose your ships selection mode.");
-        dialog.initStyle(StageStyle.UNDECORATED);
-        dialog.setContentText("Choose ocean type:");
-
-        Optional<String> result = dialog.showAndWait();
-
-        result.ifPresent(s -> {
-            if (s.equals("Random")) {
-                placeAllShipsRandomly();
-            } else {
-                System.out.println("Custom");
-            }
-        });
     }
 
 
@@ -288,17 +254,27 @@ public class Ocean {
     }
 
     public int getShipsDamaged() {
-        shipsDamaged = 0;
+        int shipsDamaged = 0;
         Set<Ship> ships = new HashSet<>();
+
         for (int i = 0; i < 10; i++)
-            for (int j = 0; j < 10;j++)
+            for (int j = 0; j < 10; j++)
                 if (isOccupied(i, j))
                     ships.add(getAt(i, j));
-        for (Ship ship :
-                ships) {
+
+        for (Ship ship : ships)
             if (ship.isDamaged())
                 shipsDamaged++;
-        }
+
         return shipsDamaged;
+    }
+
+    public int getShipsAlive() {
+        return 10 - shipsSunk;
+    }
+
+    public String getStats() {
+        return String.format("Total shoots: %d%nAlive: %d%nDamaged: %d%nSunk: %d%n",
+                getShotsFired(), getShipsAlive(), getShipsDamaged(), getShipsSunk());
     }
 }

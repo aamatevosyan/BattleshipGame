@@ -3,13 +3,15 @@ package hse.edu.battleship.gui;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class OceanCreateViewController implements Initializable {
+
     @FXML
-    OceanView oceanView;
+    GridPane oceanPane;
 
     @FXML
     Button verticalButton;
@@ -29,10 +31,12 @@ public class OceanCreateViewController implements Initializable {
     @FXML
     Button cancelButton;
 
+    OceanView oceanView;
+
     boolean isOk = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        oceanView = new OceanView(oceanPane);
     }
 }

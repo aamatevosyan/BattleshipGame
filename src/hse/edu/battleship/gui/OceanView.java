@@ -1,17 +1,10 @@
 package hse.edu.battleship.gui;
 
 import hse.edu.battleship.core.Ocean;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 public class OceanView {
@@ -23,7 +16,7 @@ public class OceanView {
     static final String DAMAGED_COLOR = "#e54044";
     static final String SUNK_COLOR = "#cbcbd2";
 
-    Button[][] oceanCells = new Button[10][10];
+    final Button[][] oceanCells = new Button[10][10];
 
     Ocean ocean;
 
@@ -66,8 +59,8 @@ public class OceanView {
             }
         }
 
-        ocean = new Ocean();
-        ocean.placeAllShipsRandomly();
+//        ocean = new Ocean();
+//        ocean.placeAllShipsRandomly();
     }
 
     void setCellColor(int i, int j) {
@@ -96,7 +89,7 @@ public class OceanView {
     }
 
     void setCellColor(int i, int j, String color) {
-        oceanCells[i][j].setStyle("-fx-background-color:" + color +";");
+        oceanCells[i][j].setStyle("-fx-background-color:" + color + ";");
     }
 
     void setCellNeutral(int i, int j) {
@@ -116,7 +109,7 @@ public class OceanView {
     }
 
     /**
-     * @param row the row to look at
+     * @param row    the row to look at
      * @param column the column to look at
      * @return sink message of the ship
      */
@@ -141,7 +134,7 @@ public class OceanView {
 
     void onWin() {
         System.out.println("You win!!!");
-        System.out.printf("Game is over. Your score is : %s%n", Integer.toString(ocean.getShotsFired()));
+        System.out.printf("Game is over. Your score is : %s%n", ocean.getShotsFired());
     }
 
     void setCellAdapter(CellAdapter cellAdapter) {

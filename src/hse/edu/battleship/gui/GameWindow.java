@@ -5,40 +5,37 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 
-public class GameWindow extends Stage {
-    public GameWindowController controller;
+public class GameWindow {
+    public final GameWindowController controller;
+    public final Stage primaryStage;
 
     public GameWindow(Ocean ocean) {
-        super();
-
-        getIcons().setAll(new Image(getClass().getResourceAsStream("images/battleship_logo.png")));
-        setTitle("BattleShip Game - Arrr!!!");
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameWindow.fxml"));
 
-        Parent part = null;
+        Parent root = null;
         try {
-            part = fxmlLoader.load();
+            root = fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Scene scene = new Scene(part);
-        controller = fxmlLoader.getController();
+        primaryStage = new Stage();
+        primaryStage.setScene(new Scene(root));
+        primaryStage.getIcons().setAll(new Image(getClass().getResourceAsStream("images/battleship_logo.png")));
+        primaryStage.setTitle("BattleShip Game - Arrr!!!");
+        primaryStage.setMinWidth(600);
+        primaryStage.setMinHeight(600);
+        primaryStage.show();
 
-        setScene(scene);
-        setMinWidth(600);
-        setMinHeight(600);
+        controller = fxmlLoader.getController();
+        controller.oceanView.ocean = ocean;
     }
 
     public void startNewGame() {
-        show();
+        controller.setStats();
     }
 }

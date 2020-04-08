@@ -11,8 +11,12 @@ import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         primaryStage.setScene(new Scene(root, 380, 330));
         primaryStage.setResizable(false);
@@ -23,10 +27,5 @@ public class Main extends Application {
         Font.loadFont("fonts\\Roboto-Regular.otf", 10);
 
         primaryStage.show();
-    }
-
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

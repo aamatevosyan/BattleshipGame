@@ -9,10 +9,18 @@ import java.util.Map;
 public class Helper {
 
     /**
+     * Defined settings for type of string to output
+     */
+    public static final String NUM = "num"; // numbers of ocean
+    public static final String INFO = "inf"; // information
+    public static final String EMPTY = "."; // empty ships
+    public static final String MINUS = "-"; // hited empty ships
+    public static final String HIT = "X"; // hited ships
+    public static final String SHIP = "S"; // ships
+    /**
      * Reset color
      */
     private static final String RESET = "\033[0m";  // Text Reset
-
     /**
      * Regular colors
      */
@@ -24,24 +32,13 @@ public class Helper {
     private static final String PURPLE = "\033[0;35m";  // PURPLE
     private static final String CYAN = "\033[0;36m";    // CYAN
     private static final String WHITE = "\033[0;37m";   // WHITE
-
     /**
      * Colors map
      */
-    private static Map<String, String> colors = new HashMap<>();
+    private static final Map<String, String> colors = new HashMap<>();
 
-    /**
-     * Defined settings for type of string to output
-     */
-    public static final String NUM = "num"; // numbers of ocean
-    public static final String INFO = "inf"; // information
-    public static final String EMPTY = "."; // empty ships
-    public static final String MINUS = "-"; // hited empty ships
-    public static final String HIT = "X"; // hited ships
-    public static final String SHIP = "S"; // ships
-
-    /**
-     * Defining default settings
+    /*
+      Defining default settings
      */
     static {
         colors.put(NUM, CYAN);
@@ -55,7 +52,7 @@ public class Helper {
 
     /**
      * @param type the type of string
-     * @param str the string sequence
+     * @param str  the string sequence
      * @return the colored string for given sequence
      */
     public static String getColoredString(String type, String str) {

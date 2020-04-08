@@ -1,8 +1,8 @@
 module battleship {
-    requires javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens hse.edu.battleship.gui to javafx.fxml, javafx.base, javafx.controls;
+    opens hse.edu.battleship.gui to javafx.fxml;
+    exports hse.edu.battleship.core;
     exports hse.edu.battleship.gui;
 }

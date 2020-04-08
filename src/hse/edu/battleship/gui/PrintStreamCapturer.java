@@ -3,12 +3,13 @@ package hse.edu.battleship.gui;
 import javafx.scene.control.TextArea;
 
 import java.io.PrintStream;
+import java.util.Objects;
 
 public class PrintStreamCapturer extends PrintStream {
 
-    private TextArea text;
+    private final TextArea text;
     private boolean atLineStart;
-    private String indent;
+    private final String indent;
 
     public PrintStreamCapturer(TextArea textArea, PrintStream capturedStream, String indent) {
         super(capturedStream);
@@ -24,7 +25,6 @@ public class PrintStreamCapturer extends PrintStream {
     private void writeToTextArea(String str) {
         if (text != null) {
             synchronized (text) {
-//                text.setCaretPosition(text.getDocument().getLength());
                 text.appendText(str);
             }
         }
@@ -126,11 +126,7 @@ public class PrintStreamCapturer extends PrintStream {
     public void print(String s) {
         synchronized (this) {
             super.print(s);
-            if (s == null) {
-                write("null");
-            } else {
-                write(s);
-            }
+            write(Objects.requireNonNullElse(s, "null"));
         }
     }
 
@@ -197,7 +193,7 @@ public class PrintStreamCapturer extends PrintStream {
     }
 
     @Override
-    public void println(char x[]) {
+    public void println(char[] x) {
         synchronized (this) {
             print(x);
             newLine();
