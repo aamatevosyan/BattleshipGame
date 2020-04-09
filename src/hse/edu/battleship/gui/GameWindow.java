@@ -14,7 +14,7 @@ public class GameWindow {
     public final Stage primaryStage;
 
     public GameWindow(Ocean ocean) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameWindow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/fxml/GameWindow.fxml"));
 
         Parent root = null;
         try {
@@ -25,7 +25,7 @@ public class GameWindow {
 
         primaryStage = new Stage();
         primaryStage.setScene(new Scene(root));
-        primaryStage.getIcons().setAll(new Image(getClass().getResourceAsStream("images/battleship_logo.png")));
+        primaryStage.getIcons().setAll(new Image(getClass().getResourceAsStream("resources/images/battleship_logo.png")));
         primaryStage.setTitle("BattleShip Game - Arrr!!!");
         primaryStage.setMinWidth(600);
         primaryStage.setMinHeight(600);

@@ -41,7 +41,7 @@ public class EmptySea extends Ship {
      */
     @Override
     public boolean isSunk() {
-        return false;
+        return isHit(getBowRow(), getBowColumn());
     }
 
     /**
@@ -66,6 +66,7 @@ public class EmptySea extends Ship {
      */
     @Override
     public String codeAt(int row, int column) {
-        return super.codeAt(row, column).replace('S', '-');
+        return toString();
+        //return super.codeAt(row, column).replace('S', '-');
     }
 }

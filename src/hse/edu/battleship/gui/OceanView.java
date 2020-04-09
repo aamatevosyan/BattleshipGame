@@ -8,10 +8,10 @@ import javafx.scene.layout.GridPane;
 public class OceanView {
     final Button[][] oceanCells = new Button[10][10];
 
-    Ocean ocean;
+    public Ocean ocean;
 
     public OceanView(GridPane gridPane) {
-        gridPane.getStylesheets().add(getClass().getResource("OceanView.css").toExternalForm());
+        gridPane.getStylesheets().add(getClass().getResource("resources/css/OceanView.css").toExternalForm());
 
         for (int i = 1; i <= 10; i++) {
             Label label = new Label();
@@ -63,7 +63,7 @@ public class OceanView {
         }
     }
 
-    void updateOceanView() {
+    public void updateOceanView() {
         for (int i = 0; i < 10; i++)
             for (int j = 0; j < 10; j++)
                 setCellColor(i, j);
@@ -72,7 +72,7 @@ public class OceanView {
     void resetOceanView() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                resetCellClass(i, j);
+                setCellNeutral(i, j);
             }
         }
     }
@@ -80,7 +80,6 @@ public class OceanView {
     private void resetCellClass(int i, int j) {
         oceanCells[i][j].getStyleClass().clear();
         setCellClass(i, j, "button");
-        setCellNeutral(i, j);
     }
 
     private void setCellClass(int i, int j, String className) {
@@ -88,6 +87,7 @@ public class OceanView {
     }
 
     private void setCellNeutral(int i, int j) {
+        resetCellClass(i, j);
         setCellClass(i, j, "button-neutral");
     }
 
@@ -103,7 +103,7 @@ public class OceanView {
         setCellClass(i, j, "button-sunk");
     }
 
-    void setCellAdapter(CellAdapter cellAdapter) {
+    public void setCellAdapter(CellAdapter cellAdapter) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 Button button = oceanCells[i][j];

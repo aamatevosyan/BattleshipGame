@@ -18,7 +18,7 @@ public class Controller {
     private void onNewGame(ActionEvent actionEvent) {
         actionEvent.consume();
 
-        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("images/battleship_logo.png")));
+        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("resources/images/battleship_logo.png")));
         imageView.setFitWidth(100);
         imageView.setFitHeight(100);
 
@@ -59,12 +59,17 @@ public class Controller {
                 result = dialog.showAndWait();
 
                 if (result.isPresent()) {
+                    ocean = new Ocean();
+
                     if (result.get().equals("Random")) {
-                        ocean = new Ocean();
                         ocean.placeAllShipsRandomly();
                     } else {
                         OceanCreateView oceanCreateView = new OceanCreateView();
-                        //TODO Ships selection - OceanViewCreate
+                        if (oceanCreateView.controller.isCorrect)
+                            ocean = oceanCreateView.controller.oceanView.ocean;
+                        else
+                            ocean.placeAllShipsRandomly();
+                        ocean.printDebug();
                     }
 
                     //TODO Network based game

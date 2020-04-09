@@ -5,11 +5,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
-      minHeight="-Infinity"
-      minWidth="-Infinity" prefHeight="330.0" prefWidth="380.0"
+      minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="380.0"
       style="-fx-background-color: #937bae;" xmlns="http://javafx.com/javafx/11.0.1"
       fx:controller="hse.edu.battleship.gui.Controller">
     <children>
@@ -17,7 +16,7 @@
             <children>
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/battleship_logo.png"/>
+                        <Image url="@../images/battleship_logo.png"/>
                     </image>
                 </ImageView>
                 <Label prefWidth="311.0" style="-fx-font-family: Lobster, cursive; -fx-font-weight: bold;"
@@ -30,23 +29,29 @@
         </VBox>
         <VBox alignment="CENTER" prefHeight="41.0" prefWidth="480.0">
             <children>
-                <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#onNewGame"
-                        style="-fx-background-color: #5e5567; -fx-padding: 5px; -fx-background-insets: 0px; -fx-border-insets: 5px;"
+                <Button fx:id="newGameButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false"
+                        onAction="#onNewGame" prefHeight="30.0" prefWidth="150.0" styleClass="new-game-button"
                         text="Start new battle, arr!" textFill="WHITE">
                     <opaqueInsets>
                         <Insets/>
                     </opaqueInsets>
+                    <VBox.margin>
+                        <Insets top="5.0"/>
+                    </VBox.margin>
                 </Button>
             </children>
         </VBox>
         <VBox alignment="CENTER" prefHeight="0.0" prefWidth="380.0">
             <children>
-                <Button fx:id="exitApplicationButton" mnemonicParsing="false" onAction="#onExitApplication"
-                        style="-fx-background-color: #5e6067; -fx-padding: 5px; -fx-background-insets: 0px; -fx-border-insets: 5px;"
-                        text="Pathetic run, loser!" textFill="WHITE">
+                <Button fx:id="exitApplicationButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false"
+                        onAction="#onExitApplication" prefHeight="30.0" prefWidth="150.0"
+                        styleClass="exit-application-button" text="Pathetic run, loser!" textFill="WHITE">
                     <opaqueInsets>
                         <Insets/>
                     </opaqueInsets>
+                    <VBox.margin>
+                        <Insets top="5.0"/>
+                    </VBox.margin>
                 </Button>
             </children>
         </VBox>

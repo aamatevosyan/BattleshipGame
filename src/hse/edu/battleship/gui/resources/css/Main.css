@@ -1,0 +1,13 @@
+.button:focused {
+    -fx-border-color: #3e424b;
+    -fx-border-width: 3px;
+    -fx-border-radius: 3px;
+}
+
+.new-game-button {
+    -fx-background-color: "#5e5567";
+}
+
+.exit-application-button {
+    -fx-background-color: "#5e6067";
+}

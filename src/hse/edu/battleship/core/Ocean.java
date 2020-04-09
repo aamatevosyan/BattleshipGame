@@ -92,8 +92,40 @@ public class Ocean {
         ship.placeShipAt(x, y, orientation, this);
     }
 
-    public void setUpOcean() {
+    /**
+     * Removes ship from ocean
+     *
+     * @param row        row of the first part of the ship
+     * @param column     column of the first part of the ship
+     * @param horizontal true, if ship is horizontal
+     * @param length     length of the ship
+     */
+    public void removeShip(int row, int column, boolean horizontal, int length) {
+        if (horizontal) {
+            for (int i = 0; i < length; i++)
+                setAt(row, column + i, new EmptySea());
+        } else {
+            for (int i = 0; i < length; i++)
+                setAt(row + i, column, new EmptySea());
+        }
+    }
 
+    /**
+     * Force sunk ship from ocean
+     *
+     * @param row        row of the first part of the ship
+     * @param column     column of the first part of the ship
+     * @param horizontal true, if ship is horizontal
+     * @param length     length of the ship
+     */
+    public void forceSunkShip(int row, int column, boolean horizontal, int length) {
+        if (horizontal) {
+            for (int i = 0; i < length; i++)
+                shootAt(row, column + i);
+        } else {
+            for (int i = 0; i < length; i++)
+                shootAt(row + i, column);
+        }
     }
 
 
@@ -253,6 +285,9 @@ public class Ocean {
         return ships[row][column];
     }
 
+    /**
+     * @return count of damaged ships
+     */
     public int getShipsDamaged() {
         int shipsDamaged = 0;
         Set<Ship> ships = new HashSet<>();
@@ -269,10 +304,16 @@ public class Ocean {
         return shipsDamaged;
     }
 
+    /**
+     * @return count of alive ships
+     */
     public int getShipsAlive() {
         return 10 - shipsSunk;
     }
 
+    /**
+     * @return current stats for ocean
+     */
     public String getStats() {
         return String.format("Total shoots: %d%nAlive: %d%nDamaged: %d%nSunk: %d%n",
                 getShotsFired(), getShipsAlive(), getShipsDamaged(), getShipsSunk());

@@ -17,7 +17,8 @@
         <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <TextArea fx:id="detailsTextArea" editable="false" prefHeight="234.0" prefWidth="661.0" GridPane.rowIndex="1">
+        <TextArea fx:id="detailsTextArea" editable="false" prefHeight="234.0" prefWidth="661.0"
+                  style="-fx-font-family: Lobster, cursive;" GridPane.rowIndex="1">
             <font>
                 <Font name="SansSerif Bold" size="14.0"/>
             </font>
@@ -41,12 +42,12 @@
             <children>
                 <TextArea fx:id="statsTextArea" editable="false" focusTraversable="false" maxHeight="-Infinity"
                           maxWidth="-Infinity" mouseTransparent="true" prefHeight="140.0" prefWidth="160.0"
-                          style="-fx-font-family: Roboto;" wrapText="true" GridPane.columnIndex="1">
+                          style="-fx-font-family: Lobster, cursive;" wrapText="true" GridPane.columnIndex="1">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
                     <font>
-                        <Font name="Times New Roman Italic" size="16.0"/>
+                        <Font name="Lobster" size="16.0"/>
                     </font>
                 </TextArea>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">

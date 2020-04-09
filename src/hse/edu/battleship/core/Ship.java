@@ -160,6 +160,11 @@ public abstract class Ship {
         }
     }
 
+    /**
+     * @param row    the row of the ship
+     * @param column the column of the ship
+     * @return true if a part of the ship occupies the given row and column has been hit, false otherwise
+     */
     public boolean isHit(int row, int column) {
         int delta = (horizontal) ? column - bowColumn : row - bowRow;
 
@@ -190,6 +195,9 @@ public abstract class Ship {
         return true;
     }
 
+    /**
+     * @return true if not all of the parts of ship has been hit, false otherwise.
+     */
     public boolean isDamaged() {
         int damagedCount = 0;
         for (int i = 0; i < length; i++)
@@ -204,5 +212,10 @@ public abstract class Ship {
     @Override
     public String toString() {
         return (isSunk()) ? "X" : "S";
+    }
+
+    public void reset() {
+        for (int i = 0; i < 4; i++)
+            hit[i] = false;
     }
 }

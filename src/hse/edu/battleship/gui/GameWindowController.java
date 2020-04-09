@@ -13,18 +13,18 @@ public class GameWindowController {
     TextArea statsTextArea;
 
     @FXML
-    TextField coordinatesTextField;
+    public TextField coordinatesTextField;
 
     @FXML
     Button shootButton;
 
     @FXML
-    TextArea detailsTextArea;
+    public TextArea detailsTextArea;
 
     @FXML
     GridPane oceanGridPane;
 
-    OceanView oceanView;
+    public OceanView oceanView;
 
     PrintStreamCapturer printStreamCapturer;
 
