@@ -14,6 +14,10 @@ After the launch there is a splash window which will be open until closing by bu
 network. For network play only ships selection is realised, but as for this HW its not required, so please be gentle
 with grading it. Also you can choose "Random" if you want to get some random board with ships already allocated.
 
+At the start board is filled with cyan cells, when you shoot at the cell, it changes its colour. If it's empty it gets
+blue color, if the ship is damaged, it's get red and it's get green if ship is sunk. When you navigate in board either
+by keyboard, either by mice it's get focused and get dark borders around it.
+
 The GameWindow allow user to play using only keyboard by moving from control to control by tab and by clicking it by
 enter. You can type coordinates separated by space in textfield and click to button "Shoot". If the coordinates were not
 correct, message will be shown. Also you can get to the ocean cells by tab and move from it using "moving keys" and
