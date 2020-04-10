@@ -15,7 +15,6 @@ public class Ocean {
     private static final Random random = new Random();
     /**
      * Used to quickly determine which ship is in any given location.
-     * Used to quickly determine which ship is in any given location.
      */
     private final Ship[][] ships = new Ship[10][10];
     /**
