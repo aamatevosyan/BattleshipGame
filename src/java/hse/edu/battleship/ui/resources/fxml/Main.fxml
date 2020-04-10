@@ -30,8 +30,8 @@
         <VBox alignment="CENTER" prefHeight="41.0" prefWidth="480.0">
             <children>
                 <Button fx:id="newGameButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false"
-                        onAction="#onNewGame" prefHeight="30.0" prefWidth="150.0" styleClass="new-game-button"
-                        text="Start new battle, arr!" textFill="WHITE">
+                        onAction="#onNewGame" prefHeight="30.0" prefWidth="150.0" style="-fx-font-family: Roboto;"
+                        styleClass="new-game-button" text="Start new battle, arr!" textFill="WHITE">
                     <opaqueInsets>
                         <Insets/>
                     </opaqueInsets>
@@ -45,7 +45,8 @@
             <children>
                 <Button fx:id="exitApplicationButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false"
                         onAction="#onExitApplication" prefHeight="30.0" prefWidth="150.0"
-                        styleClass="exit-application-button" text="Pathetic run, loser!" textFill="WHITE">
+                        style="-fx-font-family: Roboto;" styleClass="exit-application-button"
+                        text="Pathetic run, loser!" textFill="WHITE">
                     <opaqueInsets>
                         <Insets/>
                     </opaqueInsets>

@@ -17,16 +17,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        Font.loadFont(getClass().getResource("resources/fonts/Lobster-Regular.ttf").toExternalForm(), 14);
+        Font.loadFont(getClass().getResource("resources/fonts/Roboto-Regular.ttf").toExternalForm(), 14);
+
         Parent root = FXMLLoader.load(getClass().getResource("resources/fxml/Main.fxml"));
-        Scene scene = new Scene(root, 380, 330);
+        Scene scene = new Scene(root, 380, 380);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setTitle("Battleship Game - Arrr!!!");
         primaryStage.getIcons().setAll(new Image(getClass().getResourceAsStream("resources/images/battleship_logo.png")));
-
-        Font.loadFont(getClass().getResource("resources/fonts/Lobster.otf").toExternalForm(), 10);
-        Font.loadFont(getClass().getResource("resources/fonts/Roboto-Regular.ttf").toExternalForm(), 10);
 
         scene.getStylesheets().add(getClass().getResource("resources/css/Main.css").toExternalForm());
 
