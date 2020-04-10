@@ -41,7 +41,7 @@ public class OceanCreateView {
         primaryStage = new Stage();
         primaryStage.setScene(new Scene(root));
         primaryStage.getIcons().setAll(new Image(getClass().getResourceAsStream("resources/images/battleship_logo.png")));
-        primaryStage.setTitle("BattleShip Game - Arrr!!!");
+        primaryStage.setTitle("Battleship Game - Arrr!!!");
         primaryStage.setMinWidth(400);
         primaryStage.setMinHeight(520);
         primaryStage.initStyle(StageStyle.UNDECORATED);
