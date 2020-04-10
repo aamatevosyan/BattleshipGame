@@ -77,8 +77,8 @@ public class Controller {
                             ocean = oceanCreateView.controller.oceanView.ocean;
                         else
                             ocean.placeAllShipsRandomly();
-                        ocean.printDebug();
                     }
+                    ocean.printDebug();
 
                     //TODO Network based game
                 }

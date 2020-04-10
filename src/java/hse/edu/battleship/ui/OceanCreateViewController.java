@@ -13,12 +13,43 @@ import javafx.stage.StageStyle;
  * Controller for OceanCreateView
  */
 public class OceanCreateViewController {
+
     /**
      * Ships array
      */
     final Ship[] shipArray = {new Battleship(), new Cruiser(), new Cruiser(),
             new Destroyer(), new Destroyer(), new Destroyer(), new Submarine(),
             new Submarine(), new Submarine(), new Submarine()};
+    /**
+     * Vertical Button
+     */
+    @FXML
+    Button verticalButton;
+    /**
+     * Horizontal Button
+     */
+    @FXML
+    Button horizontalButton;
+    /**
+     * Revert Button
+     */
+    @FXML
+    Button revertButton;
+    /**
+     * Clear Button
+     */
+    @FXML
+    Button clearButton;
+    /**
+     * Ok Button
+     */
+    @FXML
+    Button okButton;
+    /**
+     * Cancel Button
+     */
+    @FXML
+    Button cancelButton;
     /**
      * OceanPane
      */

@@ -33,6 +33,6 @@ public class Battleship extends Ship {
      */
     @Override
     public String getShipType() {
-        return "battleship/core";
+        return "battleship";
     }
 }
