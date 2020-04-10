@@ -10,7 +10,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
       minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="380.0"
       style="-fx-background-color: #937bae;" xmlns="http://javafx.com/javafx/11.0.1"
-      fx:controller="hse.edu.battleship.gui.Controller">
+      fx:controller="hse.edu.battleship.ui.Controller">
     <children>
         <VBox alignment="CENTER" prefHeight="240.0" prefWidth="480.0">
             <children>

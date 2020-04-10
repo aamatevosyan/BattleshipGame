@@ -1,2 +1,2 @@
 set PATH_TO_FX="C:\Other\javafx-sdk-11\lib"
-java --module-path %PATH_TO_FX% --add-modules javafx.controls,javafx.fxml -Dfile.encoding=windows-1252 -jar C:\Users\newap\IdeaProjects\BattleshipGame\mods\artifacts\BattleshipGame_jar\BattleshipGame.jar
+java --module-path %PATH_TO_FX% --add-modules javafx.controls,javafx.fxml -Dfile.encoding=windows-1252 -jar mods\artifacts\BattleshipGame_jar\BattleshipGame.jar

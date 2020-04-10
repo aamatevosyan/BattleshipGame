@@ -1,56 +1,82 @@
-package hse.edu.battleship.gui;
+package hse.edu.battleship.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.StageStyle;
 
+/**
+ * Controller for GameWindow
+ */
 public class GameWindowController {
+    /**
+     * Coordinates TextField
+     */
+    @FXML
+    TextField coordinatesTextField;
+
+    /**
+     * Details TextArea
+     */
+    @FXML
+    TextArea detailsTextArea;
+
+    /**
+     * Stats TextArea
+     */
     @FXML
     TextArea statsTextArea;
 
-    @FXML
-    public TextField coordinatesTextField;
-
+    /**
+     * Shoot Button
+     */
     @FXML
     Button shootButton;
 
-    @FXML
-    public TextArea detailsTextArea;
-
+    /**
+     * Ocean's GirdPane
+     */
     @FXML
     GridPane oceanGridPane;
 
-    public OceanView oceanView;
-
+    /**
+     * PrintStreamCapturer
+     */
     PrintStreamCapturer printStreamCapturer;
 
+    /**
+     * OceanView
+     */
+    OceanView oceanView;
+
+    /**
+     * Initializes view
+     */
     public void initialize() {
         oceanView = new OceanView(oceanGridPane);
         printStreamCapturer = new PrintStreamCapturer(detailsTextArea, System.out);
         System.setOut(printStreamCapturer);
     }
 
-    public void setStats() {
+    /**
+     * Sets stats
+     */
+    void setStats() {
         statsTextArea.setText(oceanView.ocean.getStats());
     }
 
-    public void showError(String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.initStyle(StageStyle.UNDECORATED);
-        alert.setTitle("Error");
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-
-        alert.showAndWait();
-    }
-
-    public void setCellAdapter(CellAdapter cellAdapter) {
+    /**
+     * Sets CellAdapter
+     *
+     * @param cellAdapter CellAdapter
+     */
+    void setCellAdapter(CellAdapter cellAdapter) {
         oceanView.setCellAdapter(cellAdapter);
 
+        /*
+         * Shoot Button's on action event
+         */
         shootButton.setOnAction(actionEvent -> {
             String str = coordinatesTextField.getText();
             try {
@@ -62,7 +88,7 @@ public class GameWindowController {
 
                 cellAdapter.onCellClicked(i, j);
             } catch (Exception ex) {
-                showError("Invalid coordinates were typed. ", "Please type two numbers from [0, 9] separated by space.");
+                Tools.showError("Invalid coordinates were typed. ", "Please type two numbers from [0, 9] separated by space.");
             } finally {
                 coordinatesTextField.clear();
             }

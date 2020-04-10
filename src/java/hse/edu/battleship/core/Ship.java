@@ -214,6 +214,9 @@ public abstract class Ship {
         return (isSunk()) ? "X" : "S";
     }
 
+    /**
+     * Resets ships
+     */
     public void reset() {
         for (int i = 0; i < 4; i++)
             hit[i] = false;

@@ -1,4 +1,4 @@
-package hse.edu.battleship.gui;
+package hse.edu.battleship.ui;
 
 import hse.edu.battleship.core.Ocean;
 import javafx.scene.control.Alert;
@@ -7,19 +7,33 @@ import javafx.stage.StageStyle;
 
 import java.util.Optional;
 
+/**
+ * SoloGameManager
+ */
 public class SoloGameManager {
 
-    GameWindow gameWindow;
+    /**
+     * GameWindow
+     */
+    final GameWindow gameWindow;
 
+    /**
+     * Default constructor
+     *
+     * @param gameWindow game's window
+     */
     public SoloGameManager(GameWindow gameWindow) {
         this.gameWindow = gameWindow;
 
+        /*
+         * Sets cell adapter
+         */
         gameWindow.controller.setCellAdapter((i, j) -> {
             Ocean ocean = gameWindow.controller.oceanView.ocean;
             System.out.printf("Trying to shoot at (%d, %d)%n", i, j);
 
             if (ocean.getAt(i, j).isHit(i, j)) {
-                gameWindow.controller.showError("Oops, selected ship had been damaged.", "Please select another cell.");
+                Tools.showError("Oops, selected ship had been damaged.", "Please select another cell.");
             } else {
                 if (ocean.shootAt(i, j)) {
                     if (ocean.getAt(i, j).isSunk())
@@ -51,6 +65,9 @@ public class SoloGameManager {
         return "You just sunk a " + ocean.getAt(row, column).getShipType();
     }
 
+    /**
+     * Action on win
+     */
     public void onWin() {
         Ocean ocean = gameWindow.controller.oceanView.ocean;
 

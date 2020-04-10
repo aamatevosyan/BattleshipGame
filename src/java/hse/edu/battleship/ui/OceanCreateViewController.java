@@ -1,47 +1,53 @@
-package hse.edu.battleship.gui;
+package hse.edu.battleship.ui;
 
 import hse.edu.battleship.core.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class OceanCreateViewController implements Initializable {
-
-    @FXML
-    GridPane oceanPane;
-
+/**
+ * Controller for OceanCreateView
+ */
+public class OceanCreateViewController {
+    /**
+     * Ships array
+     */
     final Ship[] shipArray = {new Battleship(), new Cruiser(), new Cruiser(),
             new Destroyer(), new Destroyer(), new Destroyer(), new Submarine(),
             new Submarine(), new Submarine(), new Submarine()};
+    /**
+     * OceanPane
+     */
     @FXML
-    public Button verticalButton;
-    @FXML
-    public Button horizontalButton;
-    @FXML
-    public Button revertButton;
-
-    @FXML
-    Button okButton;
-
-    @FXML
-    Button cancelButton;
-
+    GridPane oceanPane;
+    /**
+     * OceanView
+     */
     OceanView oceanView;
-    @FXML
-    public Button clearButton;
+    /**
+     * Current index
+     */
     int currentIndex = 0;
+
+    /**
+     * True if current ship is horizontal, otherwise false
+     */
     boolean horizontal = true;
 
+    /**
+     * True if created ocean is correct, otherwise false
+     */
     boolean isCorrect = false;
 
+    /**
+     * Gets next ship from ship array
+     *
+     * @return next ship
+     */
     Ship getNextShip() {
         if (currentIndex >= 10)
             return null;
@@ -50,14 +56,21 @@ public class OceanCreateViewController implements Initializable {
         return ship;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    /**
+     * Initializes view
+     */
+    public void initialize() {
         oceanView = new OceanView(oceanPane);
         oceanView.ocean = new Ocean();
+
+        /*
+         * Sets CellAdapter
+         */
         oceanView.setCellAdapter((i, j) -> {
             Ship ship;
             if ((ship = getNextShip()) != null && ship.okToPlaceShipAt(i, j, horizontal, oceanView.ocean)) {
                 currentIndex++;
+
                 ship.placeShipAt(i, j, horizontal, oceanView.ocean);
                 oceanView.ocean.forceSunkShip(i, j, horizontal, ship.getLength());
                 oceanView.updateOceanView();
@@ -67,6 +80,11 @@ public class OceanCreateViewController implements Initializable {
         });
     }
 
+    /**
+     * Action for Ok button
+     *
+     * @param actionEvent action event
+     */
     @FXML
     void onOk(ActionEvent actionEvent) {
         isCorrect = currentIndex == 10;
@@ -89,6 +107,11 @@ public class OceanCreateViewController implements Initializable {
         }
     }
 
+    /**
+     * Action for Cancel button
+     *
+     * @param actionEvent action event
+     */
     @FXML
     void onCancel(ActionEvent actionEvent) {
         isCorrect = false;
@@ -96,16 +119,31 @@ public class OceanCreateViewController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Action for Vertical button
+     *
+     * @param actionEvent action event
+     */
     @FXML
     void onVertical(ActionEvent actionEvent) {
         horizontal = false;
     }
 
+    /**
+     * Action for Horizontal button
+     *
+     * @param actionEvent action event
+     */
     @FXML
     void onHorizontal(ActionEvent actionEvent) {
         horizontal = true;
     }
 
+    /**
+     * Action for Revert button
+     *
+     * @param actionEvent action event
+     */
     @FXML
     void onRevert(ActionEvent actionEvent) {
         if (currentIndex > 0) {
@@ -117,6 +155,11 @@ public class OceanCreateViewController implements Initializable {
         }
     }
 
+    /**
+     * Action for Clear button
+     *
+     * @param actionEvent action event
+     */
     @FXML
     void onClear(ActionEvent actionEvent) {
         int count = currentIndex;

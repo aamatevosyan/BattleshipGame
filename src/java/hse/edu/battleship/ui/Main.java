@@ -1,4 +1,4 @@
-package hse.edu.battleship.gui;
+package hse.edu.battleship.ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

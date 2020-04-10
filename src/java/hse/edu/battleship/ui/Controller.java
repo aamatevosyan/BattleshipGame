@@ -1,4 +1,4 @@
-package hse.edu.battleship.gui;
+package hse.edu.battleship.ui;
 
 import hse.edu.battleship.core.Ocean;
 import javafx.event.ActionEvent;
@@ -12,8 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controller for Main
+ */
 public class Controller {
 
+    /**
+     * New game button's action event
+     *
+     * @param actionEvent event
+     */
     @FXML
     private void onNewGame(ActionEvent actionEvent) {
         actionEvent.consume();
@@ -45,7 +53,7 @@ public class Controller {
             } else {
                 Ocean ocean;
 
-                choices = new ArrayList<>();
+                choices.clear();
                 choices.add("Random");
                 choices.add("Custom");
 
@@ -78,6 +86,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Exit button's action on event
+     *
+     * @param actionEvent event
+     */
     @FXML
     private void onExitApplication(ActionEvent actionEvent) {
         System.exit(0);

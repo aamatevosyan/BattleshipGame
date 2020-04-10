@@ -67,6 +67,5 @@ public class EmptySea extends Ship {
     @Override
     public String codeAt(int row, int column) {
         return toString();
-        //return super.codeAt(row, column).replace('S', '-');
     }
 }

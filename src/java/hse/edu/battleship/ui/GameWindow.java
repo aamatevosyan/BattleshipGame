@@ -1,4 +1,4 @@
-package hse.edu.battleship.gui;
+package hse.edu.battleship.ui;
 
 import hse.edu.battleship.core.Ocean;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +9,25 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * GameWindow class
+ */
 public class GameWindow {
-    public final GameWindowController controller;
-    public final Stage primaryStage;
+    /**
+     * GameWindow controller
+     */
+    final GameWindowController controller;
 
+    /**
+     * Primary stage
+     */
+    final Stage primaryStage;
+
+    /**
+     * Default constructor
+     *
+     * @param ocean ocean
+     */
     public GameWindow(Ocean ocean) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/fxml/GameWindow.fxml"));
 
@@ -35,7 +50,10 @@ public class GameWindow {
         controller.oceanView.ocean = ocean;
     }
 
-    public void startNewGame() {
+    /**
+     * Starts new game
+     */
+    void startNewGame() {
         controller.setStats();
     }
 }

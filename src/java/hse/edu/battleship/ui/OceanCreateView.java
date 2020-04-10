@@ -1,4 +1,4 @@
-package hse.edu.battleship.gui;
+package hse.edu.battleship.ui;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,10 +11,23 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
+/**
+ * OceanCreateView
+ */
 public class OceanCreateView {
-    public final OceanCreateViewController controller;
-    public final Stage primaryStage;
+    /**
+     * Controller for OceanCreateView
+     */
+    final OceanCreateViewController controller;
 
+    /**
+     * PrimaryStage
+     */
+    final Stage primaryStage;
+
+    /**
+     * Default constructor
+     */
     public OceanCreateView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/fxml/OceanCreateView.fxml"));
 
@@ -36,6 +49,9 @@ public class OceanCreateView {
 
         controller = fxmlLoader.getController();
 
+        /*
+         * Key handling
+         */
         root.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
             if (ev.getCode() == KeyCode.V) {
                 controller.verticalButton.fire();

@@ -1,16 +1,37 @@
-package hse.edu.battleship.gui;
+package hse.edu.battleship.ui;
 
 import javafx.scene.control.TextArea;
 
 import java.io.PrintStream;
 import java.util.Objects;
 
+/**
+ * PrintStreamCapturer
+ */
 public class PrintStreamCapturer extends PrintStream {
 
+    /**
+     * TextArea
+     */
     private final TextArea text;
+
+    /**
+     * Indentation
+     */
     private final String indent;
+
+    /**
+     * True if line starts, false otherwise
+     */
     private boolean atLineStart;
 
+    /**
+     * Default constructor
+     *
+     * @param textArea       text area
+     * @param capturedStream stream to capture
+     * @param indent         indentation
+     */
     public PrintStreamCapturer(TextArea textArea, PrintStream capturedStream, String indent) {
         super(capturedStream);
         this.text = textArea;
@@ -18,10 +39,21 @@ public class PrintStreamCapturer extends PrintStream {
         this.atLineStart = true;
     }
 
+    /**
+     * Default constructor
+     *
+     * @param textArea       text area
+     * @param capturedStream stream to capture
+     */
     public PrintStreamCapturer(TextArea textArea, PrintStream capturedStream) {
         this(textArea, capturedStream, "");
     }
 
+    /**
+     * Writes string to text area
+     *
+     * @param str string
+     */
     private void writeToTextArea(String str) {
         if (text != null) {
             synchronized (text) {
@@ -30,6 +62,11 @@ public class PrintStreamCapturer extends PrintStream {
         }
     }
 
+    /**
+     * Writes string using indentation
+     *
+     * @param str string
+     */
     private void write(String str) {
         String[] s = str.split("\n", -1);
         if (s.length == 0)
@@ -45,6 +82,11 @@ public class PrintStreamCapturer extends PrintStream {
         }
     }
 
+    /**
+     * Writes string using indentation
+     *
+     * @param s string
+     */
     private void writeWithPotentialIndent(String s) {
         if (atLineStart) {
             writeToTextArea(indent + s);
@@ -54,9 +96,16 @@ public class PrintStreamCapturer extends PrintStream {
         }
     }
 
+    /**
+     * Writes new line
+     */
     private void newLine() {
         write("\n");
     }
+
+    /*
+     * General override functions that prints to captured stream and also to text area
+     */
 
     @Override
     public void print(boolean b) {
