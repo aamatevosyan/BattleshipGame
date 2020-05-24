@@ -62,6 +62,7 @@ public class ClientGameManager extends Thread {
 
                     isTurnAvailable.set(false);
 
+
                     if (ocean.isGameOver()) {
                         message = Messenger.createWinMessage(ocean.getShotsFired());
                     } else {

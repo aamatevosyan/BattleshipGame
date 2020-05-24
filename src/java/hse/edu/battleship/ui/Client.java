@@ -35,6 +35,7 @@ public class Client extends Thread {
     Broadcaster fromManager;
     ClientGameManager clientGameManager;
     PrintStreamCapturer printStream;
+    AtomicBoolean isGameOver;
 
     /**
      * Default constructor
@@ -47,6 +48,7 @@ public class Client extends Thread {
         this.ip = ip;
         this.port = port;
         this.name = name;
+        isGameOver = new AtomicBoolean(false);
 
         try {
             s = new Socket(ip, port);
@@ -122,6 +124,7 @@ public class Client extends Thread {
                             System.out.println("onWin");
 
                             int score = Messenger.getScore(received);
+                            isGameOver.set(true);
                             Platform.runLater(() -> {
                                 Tools.showInfo("Game over", String.format("%s had shoot %d times.\n%s had shoot %d times.\n", name, score, enemyName, score));
                                 System.exit(0);
@@ -148,10 +151,12 @@ public class Client extends Thread {
                         }
                     }
                 } catch (NullPointerException | SocketException e) {
-                    Platform.runLater(() -> {
-                        Tools.showInfo("Information", enemyName + " had quited a game.");
-                        System.exit(0);
-                    });
+                    if (!isGameOver.get()) {
+                        Platform.runLater(() -> {
+                            Tools.showInfo("Information", enemyName + " had quited a game.");
+                            System.exit(0);
+                        });
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -174,8 +179,8 @@ public class Client extends Thread {
                     if (Messenger.isWinMessage(fromManager.message)) {
                         System.out.println("onWin");
 
+                        isGameOver.set(true);
                         dos.writeUTF(fromManager.message);
-                        interrupt();
 
                         Platform.runLater(() -> {
                             int score = Messenger.getScore(fromManager.message);

@@ -33,6 +33,7 @@ public class Server extends Thread {
     Stage stage;
     AtomicBoolean isRunning;
     AtomicBoolean isClientConnected;
+    AtomicBoolean isGameOver;
 
     /**
      * Default constructor
@@ -46,6 +47,7 @@ public class Server extends Thread {
         isFirstClient = true;
         isRunning = new AtomicBoolean(false);
         isClientConnected = new AtomicBoolean(false);
+        isGameOver = new AtomicBoolean(false);
 
         try {
             ss = new ServerSocket(port);
@@ -218,11 +220,11 @@ public class Server extends Thread {
                                 if (Messenger.isWinMessage(received)) {
                                     System.out.println("onWin");
                                     int score = Messenger.getScore(received);
+                                    isGameOver.set(true);
                                     Platform.runLater(() -> {
                                         Tools.showInfo("Game over", String.format("%s had shoot %d times.\n%s had shoot %d times.\n", name, score, enemyName, score - 1));
                                         System.exit(0);
                                     });
-
                                     break;
                                 }
 
@@ -243,10 +245,12 @@ public class Server extends Thread {
                                 }
                             }
                         } catch (NullPointerException | SocketException e) {
-                            Platform.runLater(() -> {
-                                Tools.showInfo("Information", enemyName + " had quited a game.");
-                                System.exit(0);
-                            });
+                            if (!isGameOver.get()) {
+                                Platform.runLater(() -> {
+                                    Tools.showInfo("Information", enemyName + " had quited a game.");
+                                    System.exit(0);
+                                });
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -270,15 +274,12 @@ public class Server extends Thread {
                                 System.out.println("onWin");
 
                                 dos.writeUTF(fromManager.message);
-                                Server.this.interrupt();
-
+                                isGameOver.set(true);
+                                int score = Messenger.getScore(fromManager.message);
                                 Platform.runLater(() -> {
-                                    int score = Messenger.getScore(fromManager.message);
                                     Tools.showInfo("Game over", String.format("%s had shoot %d times.\n%s had shoot %d times.\n", name, score, enemyName, score));
                                     System.exit(0);
                                 });
-
-                                break;
                             } else {
                                 Messenger.getShootDetails(fromManager.message).print(name, printStream);
                             }
@@ -302,7 +303,7 @@ public class Server extends Thread {
             /*
             Exit handling if client is correct
              */
-            if (correctClient) {
+            if (correctClient && !isGameOver.get()) {
                 Platform.runLater(() -> {
                     Tools.showInfo("Information", enemyName + " had quited a game.");
                     System.exit(0);

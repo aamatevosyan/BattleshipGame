@@ -29,6 +29,7 @@ You can navigate in ocean using moving pointer keys. For more comfortable access
 buttons: "Vertical" - V, "Horizontal" - H, "Revert" - R, "Clear" - C.
 
 When the application was closed or the quit button was pressed, a dialog with only OK option will be shown, which would
-close application.
+close application. By exiting application, all threads execute their overridden interrupt() and all connections were
+closed.
 
 As for getting all messages to "log field", custom class was used as some bridge between field and System.out stream.
