@@ -6,7 +6,8 @@
 <?import javafx.scene.text.Font?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
           minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0"
-          xmlns="http://javafx.com/javafx/11.0.1" fx:controller="hse.edu.battleship.ui.NetworkGameWindowController">
+          xmlns="http://javafx.com/javafx/10.0.2-internal"
+          fx:controller="hse.edu.battleship.ui.NetworkGameWindowController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
     </columnConstraints>
@@ -27,7 +28,8 @@
             <children>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="You" textAlignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER"
+                               style="-fx-font-family: Roboto; -fx-font-weight: 400;" text="You" textAlignment="CENTER">
                             <VBox.margin>
                                 <Insets top="10.0"/>
                             </VBox.margin>
@@ -76,12 +78,14 @@
                 <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0"
                       GridPane.columnIndex="1">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="Enemy" textAlignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER"
+                               style="-fx-font-family: Roboto; -fx-font-weight: 400;" text="Enemy"
+                               textAlignment="CENTER">
                             <VBox.margin>
                                 <Insets top="10.0"/>
                             </VBox.margin>
                             <font>
-                                <Font name="System Bold Italic" size="24.0"/>
+                                <Font name="SansSerif Bold Italic" size="24.0"/>
                             </font>
                         </Label>
                         <GridPane fx:id="enemyOceanGridPane" alignment="CENTER" hgap="3.0" vgap="3.0">
@@ -137,8 +141,7 @@
         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="1"
               GridPane.valignment="CENTER">
             <children>
-                <TextArea fx:id="detailsTextArea" editable="false" prefHeight="77.0"
-                          style="-fx-font-family: Lobster, cursive;" HBox.hgrow="ALWAYS">
+                <TextArea fx:id="detailsTextArea" editable="false" prefHeight="77.0" HBox.hgrow="ALWAYS">
                     <font>
                         <Font name="SansSerif Bold" size="14.0"/>
                     </font>

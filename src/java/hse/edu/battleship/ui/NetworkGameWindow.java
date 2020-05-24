@@ -45,8 +45,8 @@ public class NetworkGameWindow {
         primaryStage.setScene(new Scene(root));
         primaryStage.getIcons().setAll(new Image(getClass().getResourceAsStream("resources/images/battleship_logo.png")));
         primaryStage.setTitle("Battleship Game - Arrr!!!");
-        primaryStage.setMinWidth(600);
-        primaryStage.setMinHeight(600);
+        primaryStage.setMinWidth(650);
+        primaryStage.setMinHeight(650);
         primaryStage.show();
 
         controller = fxmlLoader.getController();
