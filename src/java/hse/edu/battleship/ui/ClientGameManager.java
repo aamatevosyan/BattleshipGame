@@ -25,6 +25,7 @@ public class ClientGameManager extends Thread {
      */
     public ClientGameManager(NetworkGameWindow gameWindow) {
         this.gameWindow = gameWindow;
+        gameWindow.controller.showCurrentPlayer(true);
 
         /*
          * Sets cell adapter
@@ -61,6 +62,7 @@ public class ClientGameManager extends Thread {
                     }
 
                     isTurnAvailable.set(false);
+                    gameWindow.controller.showCurrentPlayer(false);
 
 
                     if (ocean.isGameOver()) {
@@ -115,6 +117,7 @@ public class ClientGameManager extends Thread {
 
                     Platform.runLater(() -> {
                         gameWindow.controller.oceanView.updateOceanView();
+                        gameWindow.controller.showCurrentPlayer(true);
                     });
                 }
                 isTurnAvailable.set(true);
@@ -123,4 +126,6 @@ public class ClientGameManager extends Thread {
             }
         }
     }
+
+
 }

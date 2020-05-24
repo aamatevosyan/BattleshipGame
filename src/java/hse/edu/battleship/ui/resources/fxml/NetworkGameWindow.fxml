@@ -6,14 +6,13 @@
 <?import javafx.scene.text.Font?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
           minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0"
-          xmlns="http://javafx.com/javafx/10.0.2-internal"
-          fx:controller="hse.edu.battleship.ui.NetworkGameWindowController">
+          xmlns="http://javafx.com/javafx/11.0.1" fx:controller="hse.edu.battleship.ui.NetworkGameWindowController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="225.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
         <GridPane>
@@ -28,7 +27,7 @@
             <children>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER"
+                        <Label fx:id="youLabel" alignment="CENTER" contentDisplay="CENTER"
                                style="-fx-font-family: Roboto; -fx-font-weight: 400;" text="You" textAlignment="CENTER">
                             <VBox.margin>
                                 <Insets top="10.0"/>
@@ -68,17 +67,13 @@
                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                             </VBox.margin>
                         </GridPane>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Button fx:id="quitButton" mnemonicParsing="false" text="Quit from game"/>
-                            </children>
-                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="30.0" prefWidth="200.0"/>
                     </children>
                 </VBox>
                 <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0"
                       GridPane.columnIndex="1">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER"
+                        <Label fx:id="enemyLabel" alignment="CENTER" contentDisplay="CENTER"
                                style="-fx-font-family: Roboto; -fx-font-weight: 400;" text="Enemy"
                                textAlignment="CENTER">
                             <VBox.margin>
@@ -119,27 +114,13 @@
                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                             </VBox.margin>
                         </GridPane>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <TextField fx:id="coordinatesTextField" prefHeight="26.0" prefWidth="180.0"
-                                           promptText="Enter coordinates by space" style="-fx-font-family: Roboto;"/>
-                                <Button fx:id="shootButton" mnemonicParsing="false"
-                                        style="-fx-font-family: Lobster, cursive;" text="Shoot!!!">
-                                    <opaqueInsets>
-                                        <Insets/>
-                                    </opaqueInsets>
-                                    <HBox.margin>
-                                        <Insets left="10.0"/>
-                                    </HBox.margin>
-                                </Button>
-                            </children>
-                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="30.0" prefWidth="200.0"/>
                     </children>
                 </VBox>
             </children>
         </GridPane>
-        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="1"
-              GridPane.valignment="CENTER">
+        <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="120.0" prefWidth="500.0"
+              GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
             <children>
                 <TextArea fx:id="detailsTextArea" editable="false" prefHeight="77.0" HBox.hgrow="ALWAYS">
                     <font>
@@ -149,20 +130,45 @@
                         <Insets/>
                     </opaqueInsets>
                     <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" top="20.0"/>
+                        <Insets left="20.0"/>
                     </HBox.margin>
                 </TextArea>
-                <TextArea fx:id="statsTextArea" editable="false" focusTraversable="false" maxWidth="-Infinity"
-                          minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="140.0"
-                          prefWidth="160.0" style="-fx-font-family: Lobster, cursive; -fx-font-size: 20px;"
-                          wrapText="true">
-                    <font>
-                        <Font name="Lobster" size="16.0"/>
-                    </font>
+                <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0"
+                      HBox.hgrow="ALWAYS">
+                    <children>
+                        <TextArea fx:id="statsTextArea" editable="false" focusTraversable="false" maxWidth="-Infinity"
+                                  minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="140.0"
+                                  prefWidth="160.0" style="-fx-font-family: Lobster, cursive; -fx-font-size: 20px;"
+                                  wrapText="true">
+                            <font>
+                                <Font name="Lobster" size="16.0"/>
+                            </font>
+                        </TextArea>
+                        <TextField fx:id="coordinatesTextField" maxWidth="-Infinity" prefHeight="26.0" prefWidth="160.0"
+                                   promptText="Enter coordinates by space" style="-fx-font-family: Roboto;">
+                            <VBox.margin>
+                                <Insets bottom="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </TextField>
+                        <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="30.0" prefWidth="160.0">
+                            <children>
+                                <Button fx:id="quitButton" mnemonicParsing="false" text="Give up"/>
+                                <Button fx:id="shootButton" mnemonicParsing="false"
+                                        style="-fx-font-family: Lobster, cursive;" text="Shoot!!!">
+                                    <opaqueInsets>
+                                        <Insets/>
+                                    </opaqueInsets>
+                                    <HBox.margin>
+                                        <Insets left="20.0"/>
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
                     <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                        <Insets/>
                     </HBox.margin>
-                </TextArea>
+                </VBox>
             </children>
         </HBox>
     </children>

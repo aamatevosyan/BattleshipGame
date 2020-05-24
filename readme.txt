@@ -20,15 +20,20 @@ After the launch there is a splash window which will be open until closing by bu
 At the start board is filled with cyan cells, when you shoot at the cell, it changes its colour. If it's empty it gets
 blue color, if the ship is damaged, it's get red and it's get green if ship is sunk.
 
+If you choose Network mode, you will see two field one is your - "You", and other is enemies - "Enemy". If it shows in
+green, then you can shoot (it's your turn)
+
 You can type coordinates separated by space in textfield and click to button "Shoot". If the coordinates were not
 correct, message will be shown. Also you can click to the cell using mouse, the cell will get focused and you will see
 dark borders around that cell. If the game is over, the message will be shown with the score.
 
+Beside using mouse and text field, you can use moving pointers to navigate through fields.
+
 As for ship selection window, you need to place all ships and click to Ok button, if you click cancel, random ocean
-field will be used further. As you move pointer, the preview of placeable ship will be shown. You can choose orientation
- "Vertical" or "Horizontal" and you can revert your last ship selection by "Revert" and you can clear field by "Clear".
-You can navigate in ocean using moving pointer keys. For more comfortable access there were some shortcuts to this
-buttons: "Vertical" - V, "Horizontal" - H, "Revert" - R, "Clear" - C.
+field will be used further. As you move pointer, the preview of "available for placing" ship will be shown. You can
+choose orientation "Vertical" or "Horizontal" and you can revert your last ship selection by "Revert" and you can clear
+field by "Clear". You can navigate in ocean using moving pointer keys. For more comfortable access there were some
+shortcuts to this buttons: "Vertical" - V, "Horizontal" - H, "Revert" - R, "Clear" - C.
 
 When the application was closed or the quit button was pressed, a dialog with only OK option will be shown, which would
 close application. By exiting application, all threads execute their overridden interrupt() and all connections were

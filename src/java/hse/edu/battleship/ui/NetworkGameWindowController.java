@@ -3,9 +3,11 @@ package hse.edu.battleship.ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 /**
  * Controller for GameWindow
@@ -46,6 +48,12 @@ public class NetworkGameWindowController {
 
     @FXML
     GridPane enemyOceanGridPane;
+
+    @FXML
+    Label youLabel;
+
+    @FXML
+    Label enemyLabel;
 
     /**
      * PrintStreamCapturer
@@ -104,5 +112,15 @@ public class NetworkGameWindowController {
                 coordinatesTextField.clear();
             }
         });
+    }
+
+    public void showCurrentPlayer(boolean isTurnAvailable) {
+        if (isTurnAvailable) {
+            youLabel.setTextFill(Color.web("#baf1a1"));
+            enemyLabel.setTextFill(Color.web("#6b7478"));
+        } else {
+            enemyLabel.setTextFill(Color.web("#baf1a1"));
+            youLabel.setTextFill(Color.web("#6b7478"));
+        }
     }
 }

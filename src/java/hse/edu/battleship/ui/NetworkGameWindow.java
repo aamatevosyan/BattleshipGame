@@ -21,10 +21,6 @@ public class NetworkGameWindow {
      * Primary stage
      */
     final Stage primaryStage;
-    /**
-     * SoloGameManager
-     */
-    private NetworkGameManager networkGameManager;
 
     /**
      * Default constructor
