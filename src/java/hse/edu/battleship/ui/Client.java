@@ -202,6 +202,10 @@ public class Client extends Thread {
             dis.close();
             dos.close();
         } catch (Exception e) {
+            if (e.getMessage() == Messenger.NOT_SUPPORTED_CODE)
+                Platform.runLater(() -> {
+                    Tools.showError("Error!!!", e.getMessage());
+                });
             e.printStackTrace();
         }
     }
