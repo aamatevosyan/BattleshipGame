@@ -3,6 +3,8 @@ Jar file is located in mods/artifacts/BattleshipGame_jar.
 To run Jar file, please edit JavaFX path in start.bat and launch start.bat from Command Prompt.
 There were also some Bat files for starting with modes - "Server", "Client", "Solo".
 
+For faster testing and launching, connection dialogs have default values.
+
 All the test cases were associated with only hse.edu.battleship.core package, which presents all the classes that were
 used in HW-1. UI tests were not created as their result can be seen only while all the system is working. So you can
 see it by just lunching and playing this game.
