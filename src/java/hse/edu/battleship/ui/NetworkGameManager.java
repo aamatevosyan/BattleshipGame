@@ -8,21 +8,21 @@ import javafx.stage.StageStyle;
 import java.util.Optional;
 
 /**
- * SoloGameManager
+ * NetworkGameManager
  */
-public class SoloGameManager {
+public class NetworkGameManager extends Thread {
 
     /**
      * GameWindow
      */
-    final SoloGameWindow gameWindow;
+    final NetworkGameWindow gameWindow;
 
     /**
      * Default constructor
      *
      * @param gameWindow game's window
      */
-    public SoloGameManager(SoloGameWindow gameWindow) {
+    public NetworkGameManager(NetworkGameWindow gameWindow) {
         this.gameWindow = gameWindow;
 
         /*
@@ -54,6 +54,10 @@ public class SoloGameManager {
                 }
             }
         });
+    }
+
+    @Override
+    public void run() {
     }
 
     /**

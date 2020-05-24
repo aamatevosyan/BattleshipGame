@@ -56,14 +56,6 @@ public class OceanView {
                 int finalJ = j - 1;
                 oceanCells[finalI][finalJ] = button;
 
-                /*
-                 * Connect on hover with focused event
-                 */
-                button.hoverProperty().addListener((ov, oldValue, newValue) -> {
-                    if (newValue)
-                        oceanCells[finalI][finalJ].requestFocus();
-                });
-
                 setCellNeutral(finalI, finalJ);
                 gridPane.add(button, j, i);
             }
@@ -79,6 +71,8 @@ public class OceanView {
     private void setCellColor(int i, int j) {
         String code = ocean.codeAt(i, j);
 
+        resetCellClass(i, j);
+
         switch (code) {
             case ".":
                 setCellNeutral(i, j);
@@ -91,6 +85,9 @@ public class OceanView {
                 break;
             case "X":
                 setCellSunk(i, j);
+                break;
+            case "C":
+                setCellShown(i, j);
                 break;
         }
     }
@@ -133,7 +130,7 @@ public class OceanView {
      * @param j         cell's column
      * @param className class name
      */
-    private void setCellClass(int i, int j, String className) {
+    void setCellClass(int i, int j, String className) {
         oceanCells[i][j].getStyleClass().add(className);
     }
 
@@ -143,8 +140,7 @@ public class OceanView {
      * @param i cell's row
      * @param j cell's column
      */
-    private void setCellNeutral(int i, int j) {
-        resetCellClass(i, j);
+    void setCellNeutral(int i, int j) {
         setCellClass(i, j, "button-neutral");
     }
 
@@ -154,7 +150,7 @@ public class OceanView {
      * @param i cell's row
      * @param j cell's column
      */
-    private void setCellEmpty(int i, int j) {
+    void setCellEmpty(int i, int j) {
         setCellClass(i, j, "button-empty");
     }
 
@@ -164,7 +160,7 @@ public class OceanView {
      * @param i cell's row
      * @param j cell's column
      */
-    private void setCellDamaged(int i, int j) {
+    void setCellDamaged(int i, int j) {
         setCellClass(i, j, "button-damaged");
     }
 
@@ -174,8 +170,12 @@ public class OceanView {
      * @param i cell's row
      * @param j cell's column
      */
-    private void setCellSunk(int i, int j) {
+    void setCellSunk(int i, int j) {
         setCellClass(i, j, "button-sunk");
+    }
+
+    void setCellShown(int i, int j) {
+        setCellClass(i, j, "button-shown");
     }
 
     /**

@@ -35,3 +35,7 @@
 .button-sunk {
     -fx-background-color: #baf1a1;
 }
+
+.button-shown {
+    -fx-background-color: #6b7478;
+}

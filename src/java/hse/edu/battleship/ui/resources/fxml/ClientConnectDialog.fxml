@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity"
+      prefHeight="170.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+      fx:controller="hse.edu.battleship.ui.ClientConnectDialogController">
+    <children>
+        <HBox prefHeight="58.0" prefWidth="300.0">
+            <children>
+                <TextField fx:id="addressTextField" prefWidth="200.0" promptText="Server's adress">
+                    <HBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </HBox.margin>
+                </TextField>
+                <TextField fx:id="portTextField" prefWidth="80.0" promptText="Port">
+                    <HBox.margin>
+                        <Insets bottom="20.0" right="20.0" top="20.0"/>
+                    </HBox.margin>
+                </TextField>
+            </children>
+        </HBox>
+        <TextField fx:id="nameTextField" promptText="Your name">
+            <VBox.margin>
+                <Insets left="20.0" right="20.0"/>
+            </VBox.margin>
+        </TextField>
+        <Button fx:id="connectButton" mnemonicParsing="false" onAction="#onConnect" prefWidth="300.0" text="Connect">
+            <VBox.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </VBox.margin>
+        </Button>
+    </children>
+</VBox>

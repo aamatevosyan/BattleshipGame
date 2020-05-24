@@ -4,7 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity" prefHeight="520.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1"
+      minWidth="-Infinity"
+      prefHeight="520.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
       fx:controller="hse.edu.battleship.ui.OceanCreateViewController">
     <GridPane fx:id="oceanPane" alignment="CENTER" hgap="3.0" vgap="3.0">
         <columnConstraints>
@@ -56,8 +57,8 @@
                     prefWidth="80.0" text="Revert" GridPane.rowIndex="1"/>
             <Button fx:id="clearButton" alignment="CENTER" mnemonicParsing="false" onAction="#onClear" prefWidth="80.0"
                     text="Clear" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-            <Button fx:id="okButton" alignment="CENTER" mnemonicParsing="false" onAction="#onOk" prefWidth="80.0"
-                    text="Ok" GridPane.rowIndex="2"/>
+            <Button fx:id="okButton" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#onOk"
+                    prefWidth="80.0" text="Ok" GridPane.rowIndex="2"/>
             <Button fx:id="cancelButton" alignment="CENTER" mnemonicParsing="false" onAction="#onCancel"
                     prefWidth="80.0" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
         </children>

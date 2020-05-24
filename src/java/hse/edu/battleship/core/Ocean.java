@@ -31,6 +31,8 @@ public class Ocean {
      */
     private int shipsSunk;
 
+    private boolean shown;
+
     /**
      * Creates an "empty" ocean (fills the ships array with EmptySeas). Also initializes any game variables,
      * such as how many shots have been fired.
@@ -44,6 +46,7 @@ public class Ocean {
         }
 
         hitCount = shotsFired = shipsSunk = 0;
+        shown = false;
     }
 
 
@@ -249,8 +252,20 @@ public class Ocean {
         Ship ship = ships[row][column];
         if (ship.isSunk())
             return ship.toString();
-        else
+        else if (!shown)
             return ship.codeAt(row, column);
+        else {
+            String code = ship.codeAt(row, column);
+            if (ship.getShipType().equals("empty"))
+                return ship.toString();
+
+            if (ship.isHit(row, column))
+                return "S";
+            if (ship.toString().equals("S"))
+                return "C";
+
+            return code;
+        }
     }
 
 
@@ -317,5 +332,59 @@ public class Ocean {
     public String getStats() {
         return String.format("Total shoots: %d%nAlive: %d%nDamaged: %d%nSunk: %d%n",
                 getShotsFired(), getShipsAlive(), getShipsDamaged(), getShipsSunk());
+    }
+
+    public String decodeToString() {
+        Set<Ship> ships = new HashSet<>();
+
+        for (int i = 0; i < 10; i++)
+            for (int j = 0; j < 10; j++)
+                if (isOccupied(i, j))
+                    ships.add(getAt(i, j));
+
+        StringBuilder decoded = new StringBuilder();
+        for (Ship ship :
+                ships) {
+            decoded.append(ship.length);
+            decoded.append(ship.isHorizontal() ? "1" : "0");
+            decoded.append(ship.getBowRow());
+            decoded.append(ship.getBowColumn());
+        }
+        return decoded.toString();
+    }
+
+    public Ocean encodeFromString(String decoded) {
+        for (int i = 0; i < decoded.length(); i += 4) {
+            int length = Integer.parseInt(decoded.substring(i, i + 1));
+            boolean orientation = decoded.charAt(i + 1) == '1';
+            int row = Integer.parseInt(decoded.substring(i + 2, i + 2 + 1));
+            int column = Integer.parseInt(decoded.substring(i + 3, i + 3 + 1));
+
+            Ship ship;
+            switch (length) {
+                case 1:
+                    ship = new Submarine();
+                    break;
+                case 2:
+                    ship = new Destroyer();
+                    break;
+                case 3:
+                    ship = new Cruiser();
+                    break;
+                default:
+                    ship = new Battleship();
+                    break;
+            }
+            ship.placeShipAt(row, column, orientation, this);
+        }
+        return this;
+    }
+
+    public boolean isShown() {
+        return shown;
+    }
+
+    public void setShown(boolean value) {
+        shown = value;
     }
 }

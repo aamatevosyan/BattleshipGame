@@ -3,11 +3,9 @@ package hse.edu.battleship.ui;
 import hse.edu.battleship.core.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * Controller for OceanCreateView
@@ -63,12 +61,10 @@ public class OceanCreateViewController {
      * Current index
      */
     int currentIndex = 0;
-
     /**
      * True if current ship is horizontal, otherwise false
      */
     boolean horizontal = true;
-
     /**
      * True if created ocean is correct, otherwise false
      */
@@ -105,10 +101,24 @@ public class OceanCreateViewController {
                 ship.placeShipAt(i, j, horizontal, oceanView.ocean);
                 oceanView.ocean.forceSunkShip(i, j, horizontal, ship.getLength());
                 oceanView.updateOceanView();
-            } else {
-                //TODO Add preview and error handling
+
+                okButton.setDisable(currentIndex != 10);
             }
         });
+
+        /*
+         * Setting onHover
+         */
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                final int fi = i;
+                final int fj = j;
+                oceanView.oceanCells[i][j].hoverProperty().addListener((ov, oldValue, newValue) -> {
+                    if (newValue)
+                        preview(fi, fj);
+                });
+            }
+        }
     }
 
     /**
@@ -118,24 +128,12 @@ public class OceanCreateViewController {
      */
     @FXML
     void onOk(ActionEvent actionEvent) {
-        isCorrect = currentIndex == 10;
-
-        if (isCorrect) {
-            for (Ship ship :
-                    shipArray) {
-                ship.reset();
-            }
-            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-            stage.close();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initStyle(StageStyle.UNDECORATED);
-            alert.setTitle("Error");
-            alert.setHeaderText("The created ocean is not valid!!!");
-            alert.setContentText("Please add missing ships.");
-
-            alert.showAndWait();
+        for (Ship ship :
+                shipArray) {
+            ship.reset();
         }
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     /**
@@ -183,6 +181,7 @@ public class OceanCreateViewController {
             ship.reset();
             oceanView.ocean.removeShip(ship.getBowRow(), ship.getBowColumn(), ship.isHorizontal(), ship.getLength());
             oceanView.updateOceanView();
+            okButton.setDisable(true);
         }
     }
 
@@ -198,4 +197,22 @@ public class OceanCreateViewController {
             onRevert(actionEvent);
     }
 
+    /**
+     * Preview's current ship at given cell
+     *
+     * @param i row of the cell
+     * @param j column of the cell
+     */
+    void preview(int i, int j) {
+        oceanView.updateOceanView();
+        Ship ship;
+        if ((ship = getNextShip()) != null && ship.okToPlaceShipAt(i, j, horizontal, oceanView.ocean)) {
+            for (int h = 0; h < ship.getLength(); h++) {
+                if (horizontal)
+                    oceanView.setCellShown(i, j + h);
+                else
+                    oceanView.setCellShown(i + h, j);
+            }
+        }
+    }
 }

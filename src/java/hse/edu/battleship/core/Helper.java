@@ -17,6 +17,7 @@ public class Helper {
     public static final String MINUS = "-"; // hited empty ships
     public static final String HIT = "X"; // hited ships
     public static final String SHIP = "S"; // ships
+    public static final String SHOWN = "C"; // shown
     /**
      * Reset color
      */
@@ -47,6 +48,7 @@ public class Helper {
         colors.put(MINUS, RED);
         colors.put(HIT, YELLOW);
         colors.put(SHIP, PURPLE);
+        colors.put(SHOWN, GREEN);
     }
 
 

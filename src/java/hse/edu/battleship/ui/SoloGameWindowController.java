@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 /**
  * Controller for GameWindow
  */
-public class GameWindowController {
+public class SoloGameWindowController {
     /**
      * Coordinates TextField
      */
